@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@layer base {
+  html,
+  body {
+    background-color: #e9eef5;
+    color: #161616;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   PRINT — Today's call sheet (/calls)
+
+   A caller prints the visible batch and phones down the paper: company, city,
+   contact, number, status. Everything that only works on screen (nav links,
+   filter chips, paging, copy buttons, call-script panels, log-call buttons) is
+   marked .no-print in the markup and disappears here. White on print is fine —
+   this block never applies on screen, so the owner's emerald/grey palette is
+   untouched.
+   --------------------------------------------------------------------------- */
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .call-sheet {
+    background: #fff !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  /* One card per call, kept whole on the page. */
+  .call-sheet .call-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    box-shadow: none !important;
+    padding: 8pt !important;
+    margin: 0 0 8pt !important;
+    border-radius: 0 !important;
+  }
+
+  .call-sheet h1 {
+    color: #000 !important;
+    font-size: 16pt !important;
+    margin: 0 0 2pt !important;
+  }
+
+  /* Company, city and contact read as plain lines on paper. */
+  .call-sheet .call-card p,
+  .call-sheet .call-contact,
+  .call-sheet .call-status {
+    color: #000 !important;
+    font-size: 10.5pt !important;
+  }
+
+  .call-sheet .call-status {
+    font-weight: 700 !important;
+  }
+
+  /* The number is the one thing a caller must read across a desk. */
+  .call-sheet .call-number {
+    display: block !important;
+    color: #000 !important;
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    font-size: 15pt !important;
+    font-weight: 700 !important;
+    padding: 2pt 4pt !important;
+    text-decoration: none !important;
+    margin-top: 4pt !important;
+  }
+
+  /* Keep the page budget sane: two-up on wide paper, one-up otherwise. */
+  .call-sheet ul {
+    display: block !important;
+    margin: 8pt 0 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+}
